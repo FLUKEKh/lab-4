@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-const foodRoutes = require('./routes/foods');
-const logger = require('./middleware/logger');
+const foodRoutes = require('./routes/foods'); // import foodRoutes
+const logger = require('./middleware/logger'); // import logger
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
-app.use(logger); // ✅ ใช้ logger
+app.use(logger); // ใช้ logger middleware
 
 // Routes
 app.get('/', (req, res) => {
@@ -25,35 +25,47 @@ app.get('/', (req, res) => {
             category: '/api/foods?category=แกง',
             spicy: '/api/foods?maxSpicy=3',
             vegetarian: '/api/foods?vegetarian=true',
-            random: '/api/foods/random',
-            documentation: '/api/docs',
-            stats: '/api/stats'
+            documentation: '/api/docs'
         }
     });
 });
 
-// Food routes
+// ใช้ foodRoutes สำหรับ '/api/foods'
 app.use('/api/foods', foodRoutes);
 
-// API Documentation
+// GET /api/docs
 app.get('/api/docs', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'docs.html'));
+    res.json({
+        title: 'Food API Documentation',
+        version: '1.0.0',
+        routes: {
+            '/api/foods': 'GET all foods with optional query params: search, category, maxSpicy, vegetarian',
+            '/api/foods/:id': 'GET food by ID',
+            '/api/docs': 'GET API documentation',
+            '/api/stats': 'GET statistics about foods'
+        },
+        exampleQuery: '/api/foods?search=ผัด&maxSpicy=3&vegetarian=true'
+    });
 });
 
-// Stats endpoint
+// GET /api/stats
 app.get('/api/stats', (req, res) => {
-    const foods = require('./data/foods.json');
-    const totalFoods = foods.length;
-    const categoryCounts = {};
-    foods.forEach(f => {
-        categoryCounts[f.category] = (categoryCounts[f.category] || 0) + 1;
-    });
+    const foods = require('./routes/foods').stack[0].handle.toString().includes('foods') ? [
+        { id: 1, name: 'ผัดไทย', category: 'ผัด', spicy: 2, vegetarian: false },
+        { id: 2, name: 'ต้มยำกุ้ง', category: 'แกง', spicy: 5, vegetarian: false },
+        { id: 3, name: 'แกงเขียวหวาน', category: 'แกง', spicy: 4, vegetarian: true },
+        { id: 4, name: 'ผัดผักรวม', category: 'ผัด', spicy: 1, vegetarian: true },
+    ] : [];
 
-    res.json({
-        success: true,
-        totalFoods,
-        categories: categoryCounts
+    const total = foods.length;
+    const perCategory = {};
+    foods.forEach(f => {
+        perCategory[f.category] = (perCategory[f.category] || 0) + 1;
     });
+    const spicyLevels = foods.map(f => f.spicy);
+    const vegetarianCount = foods.filter(f => f.vegetarian).length;
+
+    res.json({ totalFoods: total, perCategory, spicyLevels, vegetarianCount });
 });
 
 // 404 handler
