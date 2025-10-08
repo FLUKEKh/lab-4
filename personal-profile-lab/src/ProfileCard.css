@@ -1,0 +1,254 @@
+:root {
+  --sakura-pink-1: #fff0f6;
+  --sakura-pink-2: #ffd6e7;
+  --sakura-pink-3: #ff9fc6;
+  --sakura-accent: #ff69b4;
+  --sakura-deep: #8e3a59;
+  --card-shadow: 0 8px 30px rgba(142,58,89,0.08);
+  --glass: rgba(255,255,255,0.6);
+}
+
+/* 🌸 Light Mode (Default) */
+.profile-card {
+  max-width: 520px;
+  margin: 22px auto;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+  background: linear-gradient(135deg, var(--sakura-pink-1), var(--sakura-pink-2), #fff);
+  color: var(--sakura-deep);
+  font-family: 'Prompt', 'Segoe UI', 'Helvetica Neue', sans-serif;
+  position: relative;
+  overflow: visible;
+  transition: all 0.4s ease;
+}
+
+/* 🌙 Dark Mode */
+.profile-card.dark-mode {
+  background: linear-gradient(135deg, #2b193d, #4a274d, #1f0f26);
+  color: #ffe6f2;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255, 182, 193, 0.2);
+}
+
+.profile-card.dark-mode .profile-avatar {
+  background: radial-gradient(circle, #3d1f3d 30%, #1e0d1f 100%);
+  color: #ffb7dc;
+  border: 4px solid rgba(255, 182, 193, 0.3);
+}
+
+.profile-card.dark-mode .info-item,
+.profile-card.dark-mode .hobby-item,
+.profile-card.dark-mode .skill-tag,
+.profile-card.dark-mode .social-link,
+.profile-card.dark-mode .achievement-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 182, 193, 0.2);
+  color: #ffd9ec;
+}
+
+.profile-card.dark-mode .info-label {
+  color: #ffb7dc;
+  opacity: 0.9;
+}
+
+.profile-card.dark-mode .contact-button {
+  background: linear-gradient(90deg, #ff85c1, #ff69b4);
+  color: #fff;
+}
+
+.profile-card.dark-mode .contact-button:hover {
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3);
+}
+
+.profile-card.dark-mode .view-counter {
+  background: rgba(255, 182, 193, 0.2);
+  color: #fff0f6;
+}
+
+/* 🌸 Avatar */
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  background: linear-gradient(145deg, #fff, var(--sakura-pink-1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  color: var(--sakura-accent);
+  font-weight: 800;
+  border: 6px solid rgba(255,255,255,0.8);
+}
+
+/* 🌸 Info Section */
+.profile-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.info-item {
+  background: rgba(255,255,255,0.8);
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--sakura-deep);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.info-label {
+  font-size: 12px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #7a3d53;
+}
+
+.info-value {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* 🌸 Hobbies */
+.hobbies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.hobby-item {
+  background: rgba(255,255,255,0.85);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  border: 1px solid rgba(255,200,220,0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hobby-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(255, 105, 180, 0.15);
+}
+
+/* 🌸 Skills */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.skill-tag {
+  background: rgba(255,255,255,0.9);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--sakura-deep);
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+
+.skill-tag:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(255,105,180,0.15);
+}
+
+/* 🌸 Social Links */
+.social-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  background: linear-gradient(90deg, #fff, #ffeef8);
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  color: var(--sakura-deep);
+  text-decoration: none;
+  border: 1px solid rgba(255,200,220,0.6);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(255,105,180,0.1);
+}
+
+/* 🌸 Button */
+.contact-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, var(--sakura-pink-3), var(--sakura-accent));
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.contact-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255,105,180,0.2);
+}
+
+/* 🌙 Dark Mode Toggle Button */
+.theme-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255,255,255,0.3);
+  color: #8e3a59;
+  border: none;
+  border-radius: 12px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+/* 🌸 Sakura Petal Animation */
+.petal {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 40% 30%, #fff, #ffd6ea 40%, #ff9fc6 100%);
+  border-radius: 50% 50% 40% 60%;
+  transform: rotate(-15deg);
+  opacity: 0.95;
+  pointer-events: none;
+  animation: petal-fall linear infinite;
+}
+
+.petal--1 { left: 10%; top: -10%; animation-duration: 6s; animation-delay: 0s; }
+.petal--2 { left: 50%; top: -12%; animation-duration: 7.5s; animation-delay: 0.5s; }
+.petal--3 { left: 80%; top: -8%; animation-duration: 8s; animation-delay: 1s; }
+
+@keyframes petal-fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+  .profile-card {
+    margin: 10px;
+    padding: 18px;
+  }
+  .profile-info {
+    grid-template-columns: 1fr;
+  }
+}
